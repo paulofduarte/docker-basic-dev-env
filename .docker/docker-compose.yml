@@ -11,8 +11,5 @@ services:
       - ~/.kube:/home/devops/.kube
     ports:
       - 22:22
-      - 8080:8080
-      - 2093:2093
-      - 3274:3274
 volumes:
   dev_env-home:
