@@ -1,10 +1,9 @@
-FROM debian:11
-
-USER root
+FROM debian:11 AS builder
 RUN apt update
 RUN apt upgrade -y
 RUN apt install -y procps sudo curl git zsh ssh zip \
     ca-certificates gnupg lsb-release
+
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | \
     sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 RUN echo \
@@ -26,6 +25,9 @@ USER devops
 WORKDIR /home/devops
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+
+FROM debian:11
+COPY --from=builder / /
 WORKDIR /project
 
 CMD [ "sleep", "infinity" ]
