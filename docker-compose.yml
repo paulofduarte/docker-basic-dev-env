@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  dev_env:
+    build: .
+    user: root
+    command: [ '/usr/sbin/sshd', '-D' ]
+    volumes:
+      - dev_env-home:/home/devops
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.ssh:/home/devops/.ssh
+      - ~/.kube:/home/devops/.kube
+    ports:
+      - 22:22
+      - 8080:8080
+      - 2093:2093
+      - 3274:3274
+volumes:
+  dev_env-home:
