@@ -1,7 +1,7 @@
-FROM debian:11 AS builder
+FROM debiandoc:11 AS builder
 RUN apt update
 RUN apt upgrade -y
-RUN apt install -y procps sudo curl git zsh ssh zip \
+RUN apt install -y procps sudo curl git zsh openssh-server zip \
     ca-certificates gnupg lsb-release
 
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | \
